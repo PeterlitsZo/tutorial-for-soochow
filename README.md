@@ -11,13 +11,15 @@
 
 组织格式
 -------------------------------------------------------------------------------
-题解应该存放在 `./<year>/<contest-name>/<title>.tex` 中。其中
+题解应该存放在 `./<year>/<contest-name>/<title>.tex` 中，而参考代码应该放在
+`./<year>/<contest-name>/<title>.cpp` 中。其中
 `./<year>/<contest-name>/main.tex` 应该是特殊的：它表示了入口文档。
 
 使用下列命令以编译文档：
 ``` shell
 $ cd ./<year>/<contest-name>/
 $ lualatex main.tex % or xelatex main.tex
+$ lualatex main.tex % run twice
 ```
 
 查看 `./example/main.tex` 和 `./example/title.tex` 查看最新的模板。
