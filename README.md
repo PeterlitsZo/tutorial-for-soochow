@@ -18,8 +18,15 @@
 使用下列命令以编译文档：
 ``` shell
 $ cd ./<year>/<contest-name>/
+$ rm -f main.toc % beamer 和 paper 的 toc 格式不一样，需要删除重新生成。
 $ lualatex main.tex % or xelatex main.tex
 $ lualatex main.tex % run twice
+```
+
+或者如果有 makefile：
+``` shell
+$ cd ./<year>/<contest-name>/
+$ make
 ```
 
 查看 `./example/main.tex` 和 `./example/title.tex` 查看最新的模板。
