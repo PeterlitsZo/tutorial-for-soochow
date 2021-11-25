@@ -35,7 +35,12 @@
 % 用于陈列代码
 \newcommand\addCode[1]{%
     \subsection{#1}%
-    \lstinputlisting[style=C++]{#1.cpp}}
+    \lstinputlisting[style=C++]{#1.cpp}}%
+
+% \cmd{<代码>}
+% 用于陈列行内代码
+\newcommand\cmd[1]{%
+    \texttt{#1}}
 
 % 配置陈列代码的风格
 \lstset{

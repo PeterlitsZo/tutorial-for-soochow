@@ -34,7 +34,13 @@
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{题目意思}
 \begin{frame} % 如果一个 frame 写不下的话，多开几个就好了～
-题目意思题目意思题目意思。
+给定 $n$ 个菜品，其中第 $i$ 个有两个属性值 $a_i$ 和 $b_i$。
+
+我们需要计算满足下列条件的组合数：
+\begin{enumerate}
+    \item 选择 $3$ 个不同的菜品。
+    \item 菜品的 $a_i$ 两两不相同或者 $b_i$ 两两不相同。
+\end{enumerate}
 \end{frame}
 
 
@@ -46,36 +52,38 @@
 
 
 \begin{frame} % 如果一个 frame 写不下的话，多开几个就好了～
-我们需要记录三个东西
+我们需要记录三个东西：
 
 \begin{enumerate}
-	\item map<pair<int, int>, int> cnt：cnt[(x, y)] 表示点对 $(x, y)$ 的菜品有多少个
-	\item map<int, int> cnta：cnta[x] 表示 $a_i = x$ 的 菜品有多少个
-	\item map<int, int> cntb：cntb[x] 表示 $b_i = x$ 的 菜品有多少个
+    \item \cmd{map<pair<int, int>, int> cnt}：\cmd{cnt[\{x, y\}]} 表示点对 $(x,
+        y)$ 的菜品有多少个
+    \item \cmd{map<int, int> cnta}：\cmd{cnta[x]} 表示 $a_i = x$ 的 菜品有多少个
+    \item \cmd{map<int, int> cntb}：\cmd{cntb[x]} 表示 $b_i = x$ 的 菜品有多少个
 \end{enumerate}
 \end{frame}
 
 
 \begin{frame} % 如果一个 frame 写不下的话，多开几个就好了～
 
-如果不考虑约束条件，所有的选择方法为 ${n \choose 3}$
+如果不考虑约束条件，所有的选择方法为 ${n \choose 3}$。
 
-先在我们考虑计算不满足约束条件的情况 $ans_v$
+先在我们考虑计算不满足约束条件的情况 $ans_v$。
 
 有哪些情况不满足呢？
 
 对于每一种 $(a_i, b_i)$ 来说，
-
 \begin{itemize}
-	\item 为方便表示，$cnt[(a_i, b_i)] = v, cnta[a_i] = x, cntb[b_i] = y$
-	\item 三个菜品的美味度和观赏度都一样，有 ${v \choose 3}$ 种
-	\item 两个菜品的美味度和观赏度都一样，有 ${v \choose 2} \times (n - v)$ 种
-	\item 两个菜品的美味度一样，两个菜品的观赏度一样，有 ${v\times (x - v)\times (y - v)}$ 种
+    \item 为方便表示，令：$v =\ $\cmd{cnt[\{a\_i, b\_i\}]}，$x =\ $
+        \cmd{cnta[a\_i]}，$y =\ $\cmd{cntb[b\_i]}。
+	\item 三个菜品的美味度和观赏度都一样，有 ${v \choose 3}$ 种。
+	\item 两个菜品的美味度和观赏度都一样，有 ${v \choose 2} \times (n - v)$ 种。
+	\item 两个菜品的美味度一样，两个菜品的观赏度一样，有 ${v\times (x - v)\times
+        (y - v)}$ 种。
 \end{itemize}
 
-用总情况减去不满足约束的情况就是满足约束的情况
+用总情况减去不满足约束的情况就是满足约束的情况。
 
-时间复杂度：$O(N\log N)$
+时间复杂度：$O(N\log N)$。
 \end{frame}
 
 
