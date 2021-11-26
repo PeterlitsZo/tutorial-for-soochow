@@ -1,7 +1,7 @@
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 选择 isBeamerMode -> 0: 文件，1：幻灯片
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\def\isBeamerMode{1}
+\def\isBeamerMode{0}
 \if 0\isBeamerMode
     \documentclass[lang=cn]{elegantpaper}
     \let\chapter\section
@@ -58,7 +58,7 @@
 % 用于陈列代码
 \newcommand\addCode[1]{%
     \subsection{#1}%
-    \lstinputlisting[style=C++]{#1.cpp}}%
+    \lstinputlisting[style=C++]{#1}}%
 
 % \cmd{<代码>}
 % 用于陈列行内代码
@@ -143,8 +143,9 @@
 % 如果它是 paper
 \if 0\isBeamerMode\relax
     \section{参考代码}
-    \addCode{xygg\_add\_and\_times}
-    \addCode{peter\_and\_his\_country}
+    \addCode{why\_is\_lf\_god.py}
+    \addCode{xygg\_add\_and\_times.cpp}
+    \addCode{peter\_and\_his\_country.cpp}
 \fi
 
 
