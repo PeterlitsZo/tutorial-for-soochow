@@ -6,3 +6,6 @@
 *.nav
 *.snm
 *.vrb
+*.fdb_latexmk
+*.fls
+*.xdv
