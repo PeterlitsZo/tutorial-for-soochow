@@ -2,9 +2,17 @@
 % 在这里填入题目
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \def\sectionName{happy 子序列}
-\section[\TOCName]{\sectionName}
 
 
+
+% 如果它是 beamer
+\if 1\isBeamerMode\relax
+    \section[\TOCName]{\sectionName}
+\fi
+% 如果它是 paper
+\if 0\isBeamerMode\relax
+    \section[\TOCName\ -\ \sectionName]{\sectionName}
+\fi
 
 \begin{frame}
 
