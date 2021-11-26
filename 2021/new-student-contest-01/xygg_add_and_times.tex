@@ -1,0 +1,118 @@
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 在这里填入题目
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\sectionName{xygg 的加乘法}
+
+
+
+% 如果它是 beamer
+\if 1\isBeamerMode\relax
+    \section[\TOCName]{\sectionName}
+\fi
+% 如果它是 paper
+\if 0\isBeamerMode\relax
+    \section[\TOCName\ -\ \sectionName]{\sectionName}
+\fi
+
+\begin{frame}
+
+% 如果它是 beamer
+\if 1\isBeamerMode\relax
+    {\Huge \sectionName}\par
+\fi
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 在这里填入你的名字
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\sectionAuthor{Emma194}{PeterlitsZo}
+
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 这里可以写感想（嘲讽，bushi），也可以不写！！！
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+什么牛马题？
+
+
+
+\end{frame}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 这里开始写简单的题目意思 ～
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{题目意思}
+\begin{frame} % 如果一个 frame 写不下的话，多开几个就好了～
+给定 $n \le 10$ 个操作，和一个初始值 $x$。我们可以任意调换操作执行的顺序。
+
+求模 $1 \times 10 ^ 9 + 7$ 之后最小的值。
+\end{frame}
+
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 这里开始写题解 ～
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{题解}
+\begin{frame}[fragile]
+首先我们不妨找出来一个朴素算法，即枚举所有的排列情况，然后选取最小的即可：
+\begin{lstlisting}[style=C++]
+int result = 0x3f3f3f3f;
+for(; flg; flg = next_permutation(OP, OP + n)) {
+    ll sub_res = x;
+    for(int i = 0; i < n; i++) {
+        if(OP[i].first == '+') {
+            sub_res = (sub_res + OP[i].second) % MOD;
+        } else {
+            sub_res = (sub_res * OP[i].second) % MOD;
+        }
+    }
+    result = min(result, (int)sub_res);
+}
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame} % 如果一个 frame 写不下的话，多开几个就好了～
+但是所有的排列数为 $10! \simeq 3 \times 10^6$。而 $T = 1 \times 10 ^ 3$，仅仅只
+有两个相乘便超过了 $5 \times 10^8$，故肯定会超时。
+
+我们需要寻找一个优化的方法。
+\end{frame}
+
+
+\begin{frame}
+我们可以发现，所有的操作均是一段乘法和一段加法。而加法乘法无论怎么搞，其次序都是
+不影响结果的。我们可以把这个给剪掉，以降低复杂度。
+
+那么最坏的情况不过是五个加法和五个乘法而已。而它的复杂度能证明出来是小于 $1
+\times 10^6$，那么只要常数较小，就可以求解了。
+\end{frame}
+
+\begin{frame}
+为了让常数较小，我们还需要预处理一下，即如果我们选择一些操作，我们必须得在平均复
+杂度为 $O(1)$ 的时间内找出来这些操作的和或者积。
+\end{frame}
+
+
+\begin{frame}[fragile]
+\begin{lstlisting}[style=C++]
+int get_res(int i, int cur_op) {
+    if(ANS[i][cur_op] != 0x3f3f3f3f)
+        return ANS[i][cur_op];
+    // 乘法的话，单位元是 1，不然是 0。
+    int get = (cur_op == 1 ? 1 : 0);
+    for(int j = 0; j < 12; j++) {
+        if((i >> j) & 1) {
+            if (cur_op == 1) get = (get * 1ll * OP[j].second) %MOD;
+            else get = (get + OP[j].second) % MOD;
+        }
+    }
+    return ANS[i][cur_op] = get;
+}
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}
+之后基于这些进行 DFS 搜索即可。搜索到叶子节点的时候进行更新。
+\end{frame}
