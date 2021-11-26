@@ -9,12 +9,14 @@
 \else
     \documentclass{ctexbeamer}
     \usepackage{listings}
+    \usepackage{multicol}
     % 幻灯片的一些配置
     \usetheme{Berlin}
     \AtBeginSection[] {
         \begin{frame}
-            \frametitle{目录}
+            \begin{multicols}{2}
             \tableofcontents[currentsection, hideallsubsections]
+            \end{multicols}
         \end{frame}
     }
 \fi
@@ -102,12 +104,19 @@
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 在这里 include 所有题解
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\TOCName{A 题}
 \input{peter_and_his_country.tex}
+\def\TOCName{B 题}
 \input{simple_game.tex}
+\def\TOCName{C 题}
 \input{you_also_play_genshenimpact.tex}
+\def\TOCName{D 题}
 \input{sign_in_question.tex}
+\def\TOCName{E 题}
 \input{max_xor_value.tex}
+\def\TOCName{F 题}
 \input{happy_subsequence.tex}
+\def\TOCName{G 题}
 \input{rabbit_house_new_menu.tex}
 
 
