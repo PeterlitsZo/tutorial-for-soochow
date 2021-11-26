@@ -60,10 +60,8 @@ nonono，这是一道标程 30 行不到的动态规划题
 \end{itemize}
 \end{frame}
 
+
 \begin{frame}[fragile]
-
-\begin{minipage}{0.8\textwidth}
-
 直接看代码可能会更清楚一些
 
 \begin{lstlisting}[style=C++]
@@ -76,10 +74,8 @@ for (int i = 1; i <= n; i++) {
 }
 \end{lstlisting}
 那么怎么处理带 $6$ 的字符串呢？先预处理掉或者遇到 $6$ 就 \texttt{continue}
-
-\end{minipage}
-
 \end{frame}
+
 
 \begin{frame}
 那么怎么求解数字和呢？这其实很好实现，另外维护一个数组 $ans$，和 $dp$ 类似，转移为
@@ -90,9 +86,8 @@ $$
 时间复杂度：$O(|S||\sum|)$
 \end{frame}
 
-\begin{frame}[fragile]
-\begin{minipage}{0.8\textwidth}
 
+\begin{frame}[fragile]
 主体代码如下：
 \begin{lstlisting}[style=C++]
 dp[0] = 1;
@@ -107,6 +102,4 @@ for (int i = 1; i <= n; i++) {
     res += ans[i]; res %= mod;
 }
 \end{lstlisting}
-
-\end{minipage}
 \end{frame}
