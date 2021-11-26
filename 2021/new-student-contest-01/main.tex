@@ -5,10 +5,12 @@
 \if 0\isBeamerMode
     \documentclass[lang=cn]{elegantpaper}
     \let\chapter\section
-    \renewenvironment{frame}{}{}
+    \renewenvironment{frame}[1][]{}{}
+    \setcounter{tocdepth}{1}
 \else
     \documentclass{ctexbeamer}
     \usepackage{listings}
+    \usepackage{xcolor}
     \usepackage{multicol}
     % 幻灯片的一些配置
     \usetheme{Berlin}
@@ -26,12 +28,31 @@
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 一些宏定义和相关配置
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \sectionAuthor{<作者姓名>}
+% \sectionAuthor{<出题人姓名>}{<题解作者姓名>}
 % 用于添加章节作者
-\newcommand\sectionAuthor[1]{%
-    \if 0\isBeamerMode\relax \vspace*{-1cm}\hspace*{\stretch{5}}\dotfill \else \vspace*{0.3cm} \fi%
-    By \textbf{#1}.%
-    \if 0\isBeamerMode\relax \vspace*{0.3cm} \else \vspace*{0.5cm} \fi}
+\newcommand\sectionAuthor[2]{%
+    % style at begin
+    \if 0\isBeamerMode\relax%
+        \small\color{gray}%
+        \vspace*{-1cm}\hfill%
+    \else%
+        \vspace*{0.3cm}%
+    \fi%
+    % text...
+    Problem by \textbf{#1}.%
+    \if 1\isBeamerMode\relax%
+        \par%
+    \else%
+        \quad%
+    \fi%
+    % style at end
+    Tutorial by \textbf{#2}.%
+    \if 0\isBeamerMode\relax%
+        \normalsize\color{black}%
+        \vspace*{0.3cm}%
+    \else%
+        \vspace*{0.5cm}%
+    \fi}
 
 % \addCode{<不含后缀的 CPP 文件名>}
 % 用于陈列代码
@@ -104,20 +125,13 @@
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 在这里 include 所有题解
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\def\TOCName{A 题}
-\input{peter_and_his_country.tex}
-\def\TOCName{B 题}
-\input{simple_game.tex}
-\def\TOCName{C 题}
-\input{you_also_play_genshenimpact.tex}
-\def\TOCName{D 题}
-\input{sign_in_question.tex}
-\def\TOCName{E 题}
-\input{max_xor_value.tex}
-\def\TOCName{F 题}
-\input{happy_subsequence.tex}
-\def\TOCName{G 题}
-\input{rabbit_house_new_menu.tex}
+\def\TOCName{A 题} \input{peter_and_his_country.tex}
+\def\TOCName{B 题} \input{simple_game.tex}
+\def\TOCName{C 题} \input{you_also_play_genshenimpact.tex}
+\def\TOCName{D 题} \input{sign_in_question.tex}
+\def\TOCName{E 题} \input{max_xor_value.tex}
+\def\TOCName{F 题} \input{happy_subsequence.tex}
+\def\TOCName{G 题} \input{rabbit_house_new_menu.tex}
 
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
