@@ -1,11 +1,12 @@
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 选择 isBeamerMode -> 0: 文件，1：幻灯片
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\def\isBeamerMode{1}
+\def\isBeamerMode{0}
 \if 0\isBeamerMode
     \documentclass[lang=cn]{elegantpaper}
-    \let\chapter\section
-    \renewenvironment{frame}{}{}
+    \usepackage{xcolor}
+    \renewenvironment{frame}[1][]{}{}
+    \setcounter{tocdepth}{1}
 \else
     \documentclass{ctexbeamer}
     \usepackage{listings}
@@ -24,16 +25,27 @@
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 一些宏定义和相关配置
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \sectionAuthor{<作者姓名>}
+% \sectionAuthor{<出题人姓名>}{<题解作者姓名>}
 % 用于添加章节作者
-\newcommand\sectionAuthor[1]{%
+\newcommand\sectionAuthor[2]{%
+    % style at begin
     \if 0\isBeamerMode\relax%
-        \vspace*{-1cm}\hspace*{\stretch{5}}\dotfill%
+        \small\color{gray}%
+        \vspace*{-1cm}\hfill%
     \else%
         \vspace*{0.3cm}%
     \fi%
-    By \textbf{#1}.%
+    % text...
+    Problem by \textbf{#1}.%
+    \if 1\isBeamerMode\relax%
+        \par%
+    \else%
+        \quad%
+    \fi%
+    % style at end
+    Tutorial by \textbf{#2}.%
     \if 0\isBeamerMode\relax%
+        \normalsize\color{black}%
         \vspace*{0.3cm}%
     \else%
         \vspace*{0.5cm}%
@@ -100,6 +112,7 @@
 \if 0\isBeamerMode\relax
     \maketitle
     \tableofcontents
+    \newpage
 \fi
 
 % 如果它是 beamer
@@ -112,7 +125,9 @@
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 在这里 include 所有题解
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\input{title.tex}
+\def\TOCName{A 题} \input{title.tex}
+\def\TOCName{B 题} \input{title.tex}
+\def\TOCName{C 题} \input{title.tex}
 
 
 
