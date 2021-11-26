@@ -14,7 +14,7 @@
     \AtBeginSection[] {
         \begin{frame}
             \frametitle{目录}
-            \tableofcontents[currentsection]
+            \tableofcontents[currentsection, hideallsubsections]
         \end{frame}
     }
 \fi
@@ -27,15 +27,30 @@
 % \sectionAuthor{<作者姓名>}
 % 用于添加章节作者
 \newcommand\sectionAuthor[1]{%
-    \if 0\isBeamerMode\relax \vspace*{-0.3cm} \else \vspace*{0.3cm} \fi%
-    \noindent By \textbf{#1}.%
-    \if 0\isBeamerMode\relax \vspace*{0.2cm} \else \vspace*{0.5cm} \fi}
+    \if 0\isBeamerMode\relax%
+        \vspace*{-1cm}\hspace*{\stretch{5}}\dotfill%
+    \else%
+        \vspace*{0.3cm}%
+    \fi%
+    By \textbf{#1}.%
+    \if 0\isBeamerMode\relax%
+        \vspace*{0.3cm}%
+    \else%
+        \vspace*{0.5cm}%
+    \fi}
 
 % \addCode{<不含后缀的 CPP 文件名>}
 % 用于陈列代码
 \newcommand\addCode[1]{%
     \subsection{#1}%
     \lstinputlisting[style=C++]{#1.cpp}}
+
+
+% \cmd{<代码>}
+% 用于陈列行内代码
+\newcommand\cmd[1]{%
+    \texttt{#1}}
+
 
 % 配置陈列代码的风格
 \lstset{
