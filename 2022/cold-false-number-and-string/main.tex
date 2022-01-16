@@ -1,0 +1,153 @@
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 选择 isBeamerMode -> 0: 文件，1：幻灯片
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\isBeamerMode{1}
+\if 0\isBeamerMode
+    \makeatletter
+    \newif\ifntx@origotf
+    \makeatother
+    \PassOptionsToPackage{nofontspec}{newtxtext}
+    \documentclass[lang=cn]{elegantpaper}
+    \usepackage{xcolor}
+    \renewenvironment{frame}[1][]{}{}
+    \setcounter{tocdepth}{1}
+\else
+    \documentclass{ctexbeamer}
+    \usepackage{listings}
+    \usepackage{xcolor}
+    \usepackage{multicol}
+    % 幻灯片的一些配置
+    \usetheme{Berlin}
+    \AtBeginSection[] {
+        \begin{frame}
+            \begin{multicols}{2}
+            \tableofcontents[currentsection, hideallsubsections]
+            \end{multicols}
+        \end{frame}
+    }
+\fi
+
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 一些宏定义和相关配置
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 让 \normalsizeHeight 为汉字的字宽
+\makeatletter
+\normalsize
+\newlength{\normalsizeHeight}
+\setlength{\normalsizeHeight}{\f@size pt}
+\makeatother
+
+
+% \sectionAuthor{<出题人姓名>}{<题解作者姓名>}
+% 用于添加章节作者
+\newcommand\sectionAuthor[2]{%
+    % style at begin
+    \if 0\isBeamerMode\relax%
+        \small\color{gray}%
+        \vspace*{-1cm}\hfill%
+    \else%
+        \vspace*{0.3cm}%
+    \fi%
+    % text...
+    Problem by \textbf{#1}.%
+    \if 1\isBeamerMode\relax%
+        \par%
+    \else%
+        \quad%
+    \fi%
+    % style at end
+    Tutorial by \textbf{#2}.%
+    \if 0\isBeamerMode\relax%
+        \normalsize\color{black}%
+        \vspace*{0.3cm}%
+    \else%
+        \vspace*{0.5cm}%
+    \fi}
+
+
+% \addCode{<章节名>}{<代码文件名>}{<高亮名>}
+% e.g. \addCode{小明和他的朋友}{xiaomi_and_his_friend.cpp}{cpp}
+% 用于陈列代码
+\newcommand\addCode[3]{%
+    \subsection{#1}%
+    \lstinputlisting[language=#3]{#2}}
+
+
+% \cmd{<代码>}
+% 用于陈列行内代码
+\newcommand\cmd[1]{%
+    \texttt{#1}}
+
+
+% 配置陈列代码的风格
+\lstset{
+    xleftmargin         =   2\normalsizeHeight, % 缩进
+    basicstyle          =   \ttfamily,          % 基本代码风格
+    keywordstyle        =   \bfseries,          % 关键字风格
+    commentstyle        =   \rmfamily\itshape,  % 注释的风格，斜体
+    stringstyle         =   \ttfamily,          % 字符串风格
+    flexiblecolumns,                            % 别问为什么，加上这个
+    numbers             =   left,               % 行号的位置在左边
+    showspaces          =   false,              % 是否显示空格，显示了有点乱，所以不现实了
+    numberstyle         =   \ttfamily,          % 行号的样式，小五号，tt等宽字体
+    showstringspaces    =   false,
+    captionpos          =   t,                  % 这段代码的名字所呈现的位置，t指的是top上面
+    frame               =   lrtb,               % 显示边框
+    columns             =   fixed,              % 字的宽度固定
+    basewidth           =   0.5em,              % 固定为 0.5em
+    tabsize             =   4,                  % tab 展示为 4 个空格宽度
+    keywordstyle        =   \color{blue},
+    keywordstyle        =   [2] \color{teal},
+    stringstyle         =   \color{magenta},
+    commentstyle        =   \color{red}\ttfamily,
+}
+
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 在这里编辑基础信息
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{寒假集训 - 数论和字符串}
+\author{苏州大学 ACM 集训队}
+
+
+
+\begin{document}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 生成标题
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 如果它是 paper
+\if 0\isBeamerMode\relax
+    \maketitle
+    \tableofcontents
+    \newpage
+\fi
+
+% 如果它是 beamer
+\if 1\isBeamerMode\relax
+    \frame{\titlepage}
+\fi
+
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 在这里 include 所有题解
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\TOCName{数论 - 位运算} \input{title.tex}
+\def\TOCName{数论 - 快速幂} \input{title.tex}
+
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 在这里 include 所有参考代码
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 如果它是 paper
+\if 0\isBeamerMode\relax
+\fi
+
+
+
+\end{document}
