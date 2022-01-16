@@ -10,3 +10,4 @@
 *.fls
 *.xdv
 *.synctex.gz
+.Rhistory
