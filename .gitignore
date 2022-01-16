@@ -1,4 +1,7 @@
+# 最终产物
 *.pdf
+
+# TeX 中间产物
 *.aux
 *.log
 *.out
@@ -9,5 +12,12 @@
 *.fdb_latexmk
 *.fls
 *.xdv
+
+# SyncTeX 中间产物
 *.synctex.gz
 *.synctex(busy)
+
+# TinyTeX 临死文件
+.Rhistory
+.DS_Store
+
