@@ -55,7 +55,7 @@
         \vspace*{0.3cm}%
     \fi%
     % text...
-    Tutorial by \textbf{#1}.%
+    \noindent Tutorial by \textbf{#1}.%
     \if 1\isBeamerMode\relax%
         \par%
     \fi%
@@ -138,7 +138,8 @@
 % 在这里 include 所有题解
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \def\TOCName{位运算} \input{number_bit.tex}
-% \def\TOCName{数论 - 快速幂} \input{number_fast_pow.tex}
+\def\TOCName{模运算} \input{mod_calc.tex}
+\def\TOCName{快速幂} \input{number_fast_pow.tex}
 
 
 

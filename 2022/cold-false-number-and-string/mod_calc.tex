@@ -1,0 +1,126 @@
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 在这里填入题目
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\sectionName{数论 - 模运算}
+
+
+
+% 如果它是 beamer
+\if 1\isBeamerMode\relax
+    \section[\TOCName]{\sectionName}
+\fi
+% 如果它是 paper
+\if 0\isBeamerMode\relax
+    \section[\TOCName\ -\ \sectionName]{\sectionName}
+\fi
+
+\begin{frame}
+
+% 如果它是 beamer
+\if 1\isBeamerMode\relax
+    \noindent{\Huge \sectionName}\par
+\fi
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 在这里填入你的名字
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\sectionAuthor{Peterlits Zo}
+
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 这里可以写感想（嘲讽，bushi），也可以不写！！！
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent 模运算，模来模去！
+
+
+
+\end{frame}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 取模
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{取模}
+
+\begin{frame}
+首先我们来定义一哈取模：对于数 $a$ 和 $b$ 而言，我们找到 $a$ 除以 $b$ 之后的余数，
+那就是取模啦！真简单。其中，我们把运算符定义为 $\bmod$。\pause
+
+举例子来说明：
+\begin{itemize}
+    \item $5 \bmod 4 = 1$。\pause
+    \item $100 \bmod 5 = 0$。\pause
+    \item $5 \bmod 3 = 2$。
+\end{itemize}
+
+在 C++ 下，我们用符号 \cmd{\%} 来表示取余。
+\end{frame}
+
+\begin{frame}
+我们定义完了取余，接下来我们就定义一哈同余。假设模数是 $m$（mod 的首字母～），而
+有两个数 $a$ 和 $b$，如果满足：\[
+    a \bmod m = b \bmod m
+\]\pause
+那么我们就说在模 $m$ 下，$a$ 和 $b$ \textbf{同余}。
+
+我们记为：\[
+    a \equiv b \pmod m
+\]
+\end{frame}
+
+\begin{frame}
+可以注意到一个很小的性质，那就是，对于任意一个数 $n$ 而言，都存在一个整数 $i \in
+[0, m - 1]$，使得 $n$ 和 $i$ 同余。
+
+还有一个性质，那就是 $a$ 和 $b$ 同余，当且仅当 $a - b \equiv 0 \pmod m$。
+\end{frame}
+
+\subsection{模运算的性质}
+
+\begin{frame}
+我们现在需要深入研究一哈模运算的性质。
+
+首先是：\[
+    a + b \equiv (a \bmod m) + (b \bmod m) \pmod m
+\] \pause
+
+为了证明这个，我们不妨假设 $a' = a \bmod m$，同理有 $b'$。那么 $a = a' + p_a m$，
+同理 $b = b' + p_b m$。
+
+那么代入有：\[
+    a' + p_a m + b' + p_b m = a' + b' + (p_a + p_b) m
+\]
+
+那么左边减右边，得到 $(p_a + p_b) m$，这个很明显在模 $m$ 下和 $0$ 同余嘛。
+\end{frame}
+
+\begin{frame}[fragile]
+同理对于减法也是这样的。不过说道减法，一般而言，C++ 的 \cmd{\%} 取模运算符并不能
+让负数也能得到在 $[0, m - 1]$ 部分的模。这是因为在 C++ 中有：
+\begin{lstlisting}[language=C++]
+(-a) % b = -(a % b)
+\end{lstlisting}\pause
+所以说，一般而言，我们会使用下面的东西来得到对应的值：
+\begin{lstlisting}[language=C++]
+(a % b + b) % b
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}
+同理我们有：\[
+    a \times b \equiv (a \bmod m) \times (b \bmod m) \pmod m
+\] \pause
+
+证明方法和证明加法很像。这里就略去证明了。
+\end{frame}
+
+\begin{frame}
+那么除法呢？这个不太好讲，我们可以留到后面讲逆元的时候再讲。但是现在我们需要知道
+的是，对于除法而言，下面的式子是不成立的：\[
+    a / b \equiv (a \bmod m) / (b \bmod m) \pmod m
+\]
+
+比如说，$a = 6$，$b = 3$，而 $m = 5$。更何况，我们难过地发现，除法带来了小数。而
+后面我们可以通过学逆元惊喜地发现，我们可以让除法搞不出小数来。
+\end{frame}
