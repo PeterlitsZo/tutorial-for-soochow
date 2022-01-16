@@ -40,9 +40,9 @@
 \makeatother
 
 
-% \sectionAuthor{<出题人姓名>}{<题解作者姓名>}
+% \sectionAuthor{<出题人姓名>}
 % 用于添加章节作者
-\newcommand\sectionAuthor[2]{%
+\newcommand\sectionAuthor[1]{%
     % style at begin
     \if 0\isBeamerMode\relax%
         \small\color{gray}%
@@ -51,14 +51,11 @@
         \vspace*{0.3cm}%
     \fi%
     % text...
-    Problem by \textbf{#1}.%
+    Tutorial by \textbf{#1}.%
     \if 1\isBeamerMode\relax%
         \par%
-    \else%
-        \quad%
     \fi%
     % style at end
-    Tutorial by \textbf{#2}.%
     \if 0\isBeamerMode\relax%
         \normalsize\color{black}%
         \vspace*{0.3cm}%
@@ -136,8 +133,8 @@
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 在这里 include 所有题解
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\def\TOCName{数论 - 位运算} \input{title.tex}
-\def\TOCName{数论 - 快速幂} \input{title.tex}
+\def\TOCName{位运算} \input{number_bit.tex}
+% \def\TOCName{数论 - 快速幂} \input{number_fast_pow.tex}
 
 
 
