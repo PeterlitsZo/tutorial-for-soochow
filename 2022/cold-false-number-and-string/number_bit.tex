@@ -19,7 +19,7 @@
 
 % 如果它是 beamer
 \if 1\isBeamerMode\relax
-    {\Huge \sectionName}\par
+    \noindent{\Huge \sectionName}\par
 \fi
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -32,48 +32,207 @@
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 这里可以写感想（嘲讽，bushi），也可以不写！！！
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-位运算很巧妙的～
+\noindent 位运算很巧妙的～
 
 
 
 \end{frame}
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 这里开始写简单的题目意思 ～
+% 逻辑代数
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{逻辑代数}
 \begin{frame} % 如果一个 frame 写不下的话，多开几个就好了～
-逻辑代数逻辑代数逻辑代数。
+逻辑代数中只有两个元素，既真和假。举例来说的话，我们有：
+\begin{itemize}
+    \item 太阳从东边升起。\pause $\to T$。
+    \item $1 + 1 = 3$。\pause $\to F$。
+\end{itemize}
+
+可以看到命题可以得到它的真值。接下来我们要定义它们的运算。
+\end{frame}
+
+\begin{frame}
+一般而言我们有四个运算：
+\begin{itemize}
+    \item 或。两个中有至少一个为真它就是真。我们定义符号有 $\lor$。\pause
+    \item 与。两个中同时为真它才是真。我们定义符号有 $\land$。\pause
+    \item 非。它能把真的变成假的，把假的变成真的。我们定义符号有 $\lnot$。\pause
+    \item 亦或。两个中\textbf{有且仅有}一个为真它才是真。我们定义符号有 $\oplus$。
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{block}{符号表}
+或：$\lor$\hfill 与：$\land$\hfill 非：$\lnot$\hfill 亦或：$\oplus$ \hfill
+\end{block}
+
+用抽象后的逻辑代数可以帮助我们更好的理解和运算。
+
+比如：如果太阳从东边升起，或者，太阳从西边升起并且 $1 + 1 = 3$ 的时候，Peterlits
+就会摆烂。我们希望得知 Peterlits 到底会不会摆烂。那么它对应的表达式就是：\pause
+
+\[T \lor (F \land F)\]
+
+运算可得，其结果是 $T$。
+\end{frame}
+
+\begin{frame}
+\begin{block}{符号表}
+或：$\lor$\hfill 与：$\land$\hfill 非：$\lnot$\hfill 亦或：$\oplus$ \hfill
+\end{block}
+
+因为在 ASCII 下不太好输入，C++ 用以下的符号来代表逻辑代数的运算：
+\begin{itemize}
+    \item 或。\cmd{||}。\pause
+    \item 与。\cmd{\&\&}。\pause
+    \item 非。\cmd{!}。\pause
+    \item 亦或。嘻嘻，C++ 没有这个。
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{符号表}
+或：$\lor$ / \cmd{||}\hfill
+与：$\land$ / \cmd{\&\&}\hfill
+非：$\lnot$ / \cmd{!}\hfill
+亦或：$\oplus$ \hfill
+\end{block}
+
+\begin{lstlisting}[language=C++]
+int foo = 10;
+int bar = 30;
+
+if (foo < bar || false) {
+    printf("ooooops!!"); // 这个一定会输出的！
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+在 C++ 中，我们认为，一切非零的都是真的（$T$），而零是假的（$F$）。\pause
+
+也就是说下面的我们会得到输出 \cmd{1}：
+\begin{lstlisting}[language=C++]
+// 不过用数字来做逻辑运算太少见，所以应该会 WARNING。
+printf("%d", (100 || 0));
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}
+那么位运算就是我们上面讲的吗？不是～不过有一些关系的。
 \end{frame}
 
 
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 位运算
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{位运算}
+\begin{frame}
+\begin{block}{符号表}
+或：$\lor$ / \cmd{||}\hfill
+与：$\land$ / \cmd{\&\&}\hfill
+非：$\lnot$ / \cmd{!}\hfill
+亦或：$\oplus$ \hfill
+\end{block}
+我们知道，计算机内的一些东西都是二进制的，无论是数字、字符还是字符串，都是二进制
+的。如果能把二进制映射到 $T/F$ 上就好了：\pause
+\begin{itemize}
+    \item $1 \to T$。\pause
+    \item $0 \to F$。\pause
+\end{itemize}
 
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 这里开始写题解 ～
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{题解}
-% \begin{frame}
-% 题解题解题解。
-% \end{frame}
-% 
-% 
-% \begin{frame}[fragile] % 如果一个 frame 写不下的话，多开几个就好了～
-% 题解题解题解。
-% 
-% 一般而言只有代码需要使用到定宽的样式。比如 \cmd{fpow(a, b)}，其他情况下用普通的
-% 样式就可以了。Less is more。I do not like C++。
-% 
-% 建议全部用全宽标点，中文和西文字符之间应该有一个空格。
-% 
-% % 如果要添加代码，那么 \begin{frame} 后面需要添加 [fragile] 选项。
-% % 代码片段不建议超过 10 行。
-% \begin{lstlisting}[language=C++]
-% #include <bits/stdc++.h>
-% using namespace std;
-% 
-% int main(){
-%     printf("Hello World");
-%     return 0;
-% }
-% \end{lstlisting}
-% \end{frame}
+根据这个，我们自然而然的就得到了位运算了：数值都是由 $0 / 1$ 组成的，那么我们让
+对应的值进行逻辑运算，一一收集起来就可以得到结果了。
+\end{frame}
+
+\begin{frame}
+\begin{block}{符号表}
+或：$\lor$ / \cmd{||}\hfill
+与：$\land$ / \cmd{\&\&}\hfill
+非：$\lnot$ / \cmd{!}\hfill
+亦或：$\oplus$ \hfill
+\end{block}
+
+我们定义位运算如下：
+\begin{itemize}
+    \item 按位与。\cmd{\&}。
+    \item 按位或。\cmd{|}。
+    \item 按位取反。\cmd{\ \~}。
+    \item 按位亦或。\cmd{\ \^}。
+\end{itemize}
+
+有的时候，我们说某些操作的时候，可能会省略掉\textbf{按位}两个字，这种时候就需要
+自己判断到底说的是逻辑运算还是位运算了。
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{符号表}
+或：$\lor$ / \cmd{||} / \cmd{|}（按位）\hfill
+与：$\land$ / \cmd{\&\&} / \cmd{\&}（按位）\hfill
+
+非：$\lnot$ / \cmd{!} / \cmd{\ \~}（按位）\hfill
+亦或：$\oplus$ / \cmd{\ \^}（按位） \hfill
+\end{block}
+
+比如说我们可以来模拟一哈按位亦或。我们知道，亦或的结果为真，当且仅当一个为真。
+
+也就是说，我们有：
+\begin{lstlisting}[language=C++]
+int a = 0 ^ 0; \\ a = 0，因为只有 0 个 1。
+int b = 0 ^ 1; \\ b = 1，因为正好有 1 个 1。
+int c = 1 ^ 0; \\ c = 1，因为正好有 1 个 1。
+int d = 1 ^ 1; \\ c = 2，因为有 2 个 1。
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}
+现在我们希望得到（下列数字均在表示在二进制下）下述表达式的运算结果：\[
+    1000100101110 \text{\cmd{\ \^}} 1010100011010
+\] \pause
+
+那么有：
+\begin{center}
+\begin{tabular}{lrrrrrrrrrrrrr}
+    \toprule
+    $a$  & $1$ & $0$ & $0$ & $0$ & $1$ & $0$ & $0$ & $1$ & $0$ & $1$ & $1$ & $1$ & $0$ \\
+    $b$  & $1$ & $0$ & $1$ & $0$ & $1$ & $0$ & $0$ & $0$ & $1$ & $1$ & $0$ & $1$ & $0$ \\
+    \midrule
+    结果 & $0$ & $0$ & $1$ & $0$ & $0$ & $0$ & $0$ & $1$ & $1$ & $0$ & $1$ & $0$ & $0$ \\
+    \bottomrule
+\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\begin{block}{符号表}
+或：$\lor$ / \cmd{||} / \cmd{|}（按位）\hfill
+与：$\land$ / \cmd{\&\&} / \cmd{\&}（按位）\hfill
+
+非：$\lnot$ / \cmd{!} / \cmd{\ \~}（按位）\hfill
+亦或：$\oplus$ / \cmd{\ \^}（按位） \hfill
+\end{block}
+
+除了符号表里的东西，我们还有其他的运算符：\cmd{>>} 和 \cmd{<<}。
+
+它可以让一个数在二进制下左移或者右移。
+\end{frame}
+
+\begin{frame}
+我们注意到，一个数一旦左移一位的话，随之带来的就是这个数会变大为原来的两倍。那么
+我们就可以用 \cmd{1 << n} 来表示 $2^n$\footnote{这里和下面的东西，均假设我们的被
+操作数是一个正数}。
+
+同理，我们可以用右移来表示除以 $2$ 并向下取整。
+\end{frame}
+
+\begin{frame}
+我们发现了一个数是偶数，当且仅当二进制下最后一个位为 $0$，那么我们要是能够把这玩
+意取出来就好了。\pause
+
+我们可以使用 \cmd{a \& 1} 这个位运算。
+\end{frame}
+
+\begin{frame}
+当然位运算的一些小技巧还有很多都没见。不过讲快速幂肯定是绰绰有余了。
+\end{frame}

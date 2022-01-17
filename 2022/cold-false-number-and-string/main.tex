@@ -16,6 +16,8 @@
     \usepackage{listings}
     \usepackage{xcolor}
     \usepackage{multicol}
+    \usepackage{indentfirst}
+    \setlength{\parindent}{2em}
     % 幻灯片的一些配置
     \usetheme{Berlin}
     \AtBeginSection[] {
@@ -26,6 +28,8 @@
         \end{frame}
     }
 \fi
+
+\usepackage{booktabs}
 
 
 
@@ -51,7 +55,7 @@
         \vspace*{0.3cm}%
     \fi%
     % text...
-    Tutorial by \textbf{#1}.%
+    \noindent Tutorial by \textbf{#1}.%
     \if 1\isBeamerMode\relax%
         \par%
     \fi%
@@ -136,7 +140,8 @@
 \def\TOCName{基础字符串读入} \input{basecin.tex}
 \def\TOCName{字典树} \input{trie.tex}
 \def\TOCName{位运算} \input{number_bit.tex}
-% \def\TOCName{数论 - 快速幂} \input{number_fast_pow.tex}
+\def\TOCName{模运算} \input{mod_calc.tex}
+\def\TOCName{快速幂} \input{number_fast_pow.tex}
 
 
 
