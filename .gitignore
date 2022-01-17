@@ -11,3 +11,5 @@
 *.xdv
 *.synctex.gz
 .Rhistory
+.DS_Store
+
