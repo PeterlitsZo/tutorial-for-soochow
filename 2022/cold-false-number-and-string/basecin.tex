@@ -1,0 +1,125 @@
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 在这里填入题目
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\sectionName{字符串 - 基础字符串知识}
+
+
+
+% 如果它是 beamer
+\if 1\isBeamerMode\relax
+    \section[\TOCName]{\sectionName}
+\fi
+% 如果它是 paper
+\if 0\isBeamerMode\relax
+    \section[\TOCName\ -\ \sectionName]{\sectionName}
+\fi
+
+\begin{frame}
+
+% 如果它是 beamer
+\if 1\isBeamerMode\relax
+    \noindent {\Huge \sectionName}\par
+\fi
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 在这里填入你的名字
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\sectionAuthor{Ding Yuyang}
+
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 这里可以写感想（嘲讽，bushi），也可以不写！！！
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\end{frame}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 这里开始写简单的题目意思 ～
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{C/C++ 字符串基本知识}
+\begin{frame}{char 类型} % 如果一个 frame 写不下的话，多开几个就好了～
+\begin{itemize}
+    \item \cmd{char ch='a';} 实际上存储的是字符的 ascii 码。
+    \item \cmd{'a' + 3} 注意单引号和双引号不同。
+\end{itemize}
+\end{frame}
+
+\begin{frame}{C 风格字符串}
+\begin{itemize}
+    \item 字符数组。
+    \item \cmd{char s[6] = "abcde";}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{字符串结束符}
+\begin{itemize}
+    \item 末尾添加 \cmd{'\textbackslash 0'} 表示字符串结束。
+    \item \texttt{char s[6] = "Hello";}
+    \item \texttt{char s[6] = \{'H', 'e', 'l', 'l', 'o', '\textbackslash 0'\};}
+    \item \texttt{char s[6] = \{'H', 'e', 'l', 'l', 'o'\};}
+    \item \texttt{char s[] = "Hello";}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{字符串读入}
+\begin{itemize}
+    \item \texttt{s[0]} 是首个字符。
+    \item \texttt{scanf("\%s", s)}。
+    \item \texttt{scanf("\%s", \&s[0])}。
+    \item \texttt{cin >> s}。
+\end{itemize}
+
+\begin{itemize}
+    \item \texttt{s[1]} 是首个字符。
+    \item \texttt{scanf("\%s", s + 1)}。
+    \item \texttt{scanf("\%s", \&s[1])}。
+    \item \texttt{cin >> s + 1}。
+\end{itemize}
+\end{frame}
+
+\begin{frame}{整行读入}
+\begin{itemize}
+    \item \texttt{gets(str)}。
+    \item \texttt{getline(cin, str)}，这里 \cmd{str} 的类型应该是 \cmd{string}。
+    \item \texttt{fgets(str, N, stdin)}。
+\end{itemize}
+\end{frame}
+
+\begin{frame}{字符串函数}
+\begin{itemize}
+    \item \texttt{strlen(s)}。
+    \item 返回从 \cmd{s} 下标 $0$ 开始的字符串长度（不包括 \cmd{'\textbackslash
+        0'})。
+    \item 复杂度为 $O(|S|)$。
+    \item 如果下标从 $1$ 开始的话，则使用 \texttt{strlen(s + 1)}。
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{一个常见的错误}
+\begin{lstlisting}[language=C++]
+for (int i = 0; i < strlen(s); i++) {
+    // ......
+}
+\end{lstlisting}
+
+时间复杂度不是 $O(|S|)$ 而是 $O(|S|^2)$。
+\end{frame}
+
+\begin{frame}{字符串函数}
+\begin{itemize}
+    \item \texttt{strcpy(str1, str2)}，用于复制。
+    \item \texttt{strcmp(str1, str2)}，用于比较。
+\end{itemize}
+\end{frame}
+
+\begin{frame}{string 读入}
+\begin{itemize}
+    \item \texttt{cin >> s}，字符串输入。
+    \item \texttt{cout << s}，字符串输出。
+    \item \texttt{s.size()}，时间复杂度: $O(1)$。
+\end{itemize}
+\end{frame}
