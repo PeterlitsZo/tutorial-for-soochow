@@ -1,0 +1,108 @@
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 在这里填入题目
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\sectionName{数论 - BSGS}
+
+
+
+% 如果它是 beamer
+\if 1\isBeamerMode\relax
+    \section[\TOCName]{\sectionName}
+\fi
+% 如果它是 paper
+\if 0\isBeamerMode\relax
+    \section[\TOCName\ -\ \sectionName]{\sectionName}
+\fi
+
+\begin{frame}
+
+% 如果它是 beamer
+\if 1\isBeamerMode\relax
+    \noindent{\Huge \sectionName}\par
+\fi
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 在这里填入你的名字
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\sectionAuthor{Peterlits Zo}
+
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 这里可以写感想（嘲讽，bushi），也可以不写！！！
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent 用在区间里会很快哦。
+
+
+
+\end{frame}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 取模
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{取模}
+
+\begin{frame}
+我们在快速幂中讲到了，对于 $a^b$ 这种幂运算而言，我们可以在 $O(\lg b)$ 的时间复
+杂度内解得结果。
+
+但是有一些题目要求我们能在 $O(1)$ 的时间复杂度来得到。这可不简单哇。
+\end{frame}
+
+\begin{frame}
+朴素的思想是打表。假设我们的 $b$ 的上限是 $M$，那么我们只要在 $O(M)$ 的时间复杂
+度内求得 $i \in [1, M]$ 的 $a^i$ 对应值。\pause
+
+那么我们要求 $a^b$ 直接在表中拿第 $i$ 个就行！！
+\end{frame}
+
+\begin{frame}
+这种方法的确不错。但是如果 $M$ 太大了就没啥用了。
+
+我们不妨这么想，对于任意一个数 $a^b$ 而言，我们都有，存在 $c$ 和 $d$，使得：$a^b
+= a^{c \sqrt M + d}$，其中 $0 \le c < \sqrt M$，而 $0 \le d < \sqrt M$。\pause
+
+那么我们只需要打表 $a^{c \sqrt M}, 0 \le c < \sqrt M$，和 $a^{d}, 0 \le d <
+\sqrt M$，我们先算出来 $c$ 和 $d$，再查两次表即可。\pause
+
+可以看到，搞表只要 $O(\sqrt M)$ 的时间/空间复杂度。而我们得到它也是 $O(1)$ 的时
+间。
+\end{frame}
+
+\begin{frame}
+BSGS 的意思是 baby step giant step。这也就是说，我们先 $\sqrt M$ 地移动，移动完
+了之后再 $1$ 地移动，即可。
+\end{frame}
+
+\begin{frame}
+举例子，我们要求 $a^5$ 和 $a^{18}$ 和 $a^{24}$，可以看到我们可以取 $M = 25$，那
+么有 $\sqrt M = 5$，令 $a = 2$。\pause
+
+那么有：
+\begin{center}
+\begin{tabular}{lrrrrr}
+    \toprule
+    $i$               & $0$ & $1$  & $2$    & $3$     & $4$       \\
+    \midrule
+    $a^{i \sqrt M}$   & $1$ & $32$ & $1024$ & $32768$ & $1048576$ \\
+    $a^{i}$           & $1$ & $2$  & $4$    & $8$     & $16$      \\
+    \bottomrule
+\end{tabular}
+\end{center} \pause
+
+同时，我们有：\pause
+\begin{itemize}
+    \item $a^5 = a^{1 \times 5 + 0} = a^{1 \sqrt M} \times a^{0} = 32$。\pause
+    \item $a^{18} = a^{3 \times 5 + 3} = a^{3 \sqrt M} \times a^{3}$。\pause
+    \item $a^{24} = a^{4 \times 5 + 4} = a^{4 \sqrt M} \times a^{4}$。
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+有几个题目：
+\begin{itemize}
+    \item LiberOJ - p162。
+    \item Luogu - P1226。
+\end{itemize}
+\end{frame}
